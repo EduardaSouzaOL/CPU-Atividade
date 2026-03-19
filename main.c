@@ -5,6 +5,8 @@ uint8_t mem[256] = {0};
 uint8_t reg[4] = {0};
 uint8_t pc = 0, zf = 0, running = 1;
 int ciclo = 0;
+int array[8] = {34, 12, 56, 3, 78, 45, 9,
+67};
 
 
 void fetch(uint8_t *op, uint8_t *a, uint8_t *b)
