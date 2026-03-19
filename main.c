@@ -6,6 +6,7 @@ uint8_t reg[4] = {0};
 uint8_t pc = 0, zf = 0, running = 1;
 int ciclo = 0;
 
+
 void fetch(uint8_t *op, uint8_t *a, uint8_t *b)
 {
     *op = mem[pc];
@@ -51,6 +52,7 @@ void decode_execute(uint8_t op, uint8_t a, uint8_t b)
         break;
     }
 }
+
 void trace(uint8_t op, uint8_t a, uint8_t b)
 {
     const char *nomes[] = {"", "LOAD", "STORE", "ADD",
@@ -59,6 +61,13 @@ void trace(uint8_t op, uint8_t a, uint8_t b)
            " R2=%3d R3=%3d | PC=%3d ZF=%d\n",
            ciclo, nomes[op], a, b,
            reg[0], reg[1], reg[2], reg[3], pc, zf);
+}
+
+void func_min() {
+    mem[0x00] = 0x05; mem[0x01] = 0x00; mem[0x02] = 0x0A; /* MOV R0, 10 */
+    mem[0x03] = 0x05; mem[0x04] = 0x01; mem[0x05] = 0x01; /* MOV R1, 1 */
+    mem[0x06] = 0x03; mem[0x07] = 0x00; mem[0x08] = 0x01; /* ADD R0, R1 */
+    mem[0x09] = 0x0A; mem[0x0A] = 0x00; mem[0x0B] = 0x00; /* HALT */
 }
 
 int main()
